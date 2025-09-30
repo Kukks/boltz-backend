@@ -7,7 +7,6 @@ import ArkClient, {
   type CreatedVHtlc,
   type SpentVHtlc,
 } from '../chain/ArkClient';
-import AspClient from '../chain/AspClient';
 import {
   CurrencyType,
   SwapUpdateEvent,
@@ -124,7 +123,7 @@ class ArkNursery extends TypedEventEmitter<{
   };
 
   private checkClaims = async (arkNode: ArkClient, vHtlc: SpentVHtlc) => {
-    const claimTx = await arkNode.aspClient.getTx(vHtlc.spentBy);
+    const claimTx = await arkNode.getTx(vHtlc.spentBy);
     for (const preimage of ArkNursery.extractPreimages(claimTx)) {
       const preimageHash = createHash('sha256').update(preimage).digest('hex');
 
@@ -169,7 +168,7 @@ class ArkNursery extends TypedEventEmitter<{
   };
 
   private static extractPreimages = (tx: Transaction) => {
-    return AspClient.mapInputs(tx)
+    return ArkClient.mapInputs(tx)
       .map((input) => {
         const arkConditionField = input.unknown?.find(([x]) =>
           ArkNursery.isPreimage(x),
