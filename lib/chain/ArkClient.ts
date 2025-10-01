@@ -391,8 +391,6 @@ class ArkClient extends BaseClient<
       createDelay(timeouts.unilateralRefundWithoutReceiver),
     );
 
-    this.logger.silly(`Creating vHTLC check: ${timeouts}`);
-
     return {
       timeouts,
       height: currentHeight,
