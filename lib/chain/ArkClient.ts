@@ -4,7 +4,7 @@ import { crypto } from 'bitcoinjs-lib';
 import type { BaseClientEvents } from '../BaseClient';
 import BaseClient from '../BaseClient';
 import type Logger from '../Logger';
-import { createVhtlcId, formatError, getHexString } from '../Utils';
+import { formatError, getHexString } from '../Utils';
 import { ClientStatus } from '../consts/Enums';
 import TransactionLabelRepository from '../db/repositories/TransactionLabelRepository';
 import { unaryCall } from '../lightning/GrpcUtils';
@@ -405,14 +405,12 @@ class ArkClient extends BaseClient<
 
   public claimVHtlc = async (
     preimage: Buffer,
-    preimageHash: string,
-    senderPubkey: string,
-    receiverPubkey: string,
+    vhtlcId: string,
     label: string,
   ): Promise<string> => {
     const req = new arkrpc.ClaimVHTLCRequest();
     req.setPreimage(getHexString(preimage));
-    req.setVhtlcId(createVhtlcId(preimageHash, senderPubkey, receiverPubkey));
+    req.setVhtlcId(vhtlcId);
 
     const res = await this.unaryCall<
       arkrpc.ClaimVHTLCRequest,
@@ -427,9 +425,9 @@ class ArkClient extends BaseClient<
     return res.redeemTxid;
   };
 
-  public refundVHtlc = async (preimageHash, claimPublicKey, refundPubkey, label: string) => {
+  public refundVHtlc = async (vhtlcId: string, label: string) => {
     const req = new arkrpc.RefundVHTLCWithoutReceiverRequest();
-    req.setVhtlcId(createVhtlcId(preimageHash, refundPubkey, claimPublicKey));
+    req.setVhtlcId(vhtlcId);
 
     const res = await this.unaryCall<
       arkrpc.RefundVHTLCWithoutReceiverRequest,

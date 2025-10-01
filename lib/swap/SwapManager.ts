@@ -1405,7 +1405,11 @@ class SwapManager {
           const refundPubKey = (await arkNode.getInfo()).pubkey;
 
           const swapReverse = swap as ReverseSwap;
-          const vhtlcId = createVhtlcId(swap.preimageHash, refundPubKey, swapReverse.claimPublicKey!);
+          const vhtlcId = createVhtlcId(
+            swap.preimageHash,
+            refundPubKey,
+            swapReverse.claimPublicKey!,
+          );
 
           arkNode.subscription.subscribeAddresses([
             {
@@ -1425,7 +1429,11 @@ class SwapManager {
         } else if (arkNode) {
           const claimPubKey = (await arkNode.getInfo()).pubkey;
           const swapSubmarine = swap as Swap;
-          const vhtlcId = createVhtlcId(swap.preimageHash, swapSubmarine.refundPublicKey!, claimPubKey);
+          const vhtlcId = createVhtlcId(
+            swap.preimageHash,
+            swapSubmarine.refundPublicKey!,
+            claimPubKey,
+          );
 
           arkNode.subscription.subscribeAddresses([
             {

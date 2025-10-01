@@ -29,8 +29,10 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg -
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
+ARG VERSION
+RUN git clone https://github.com/aruokhai/boltz-backend.git -b ${VERSION}
 WORKDIR /boltz-backend
-COPY . .
+RUN git submodule update --init
 
 RUN npm ci
 RUN npm run compile:release
