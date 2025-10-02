@@ -1123,3 +1123,47 @@ export namespace Tapscripts {
         scriptsList: Array<string>,
     }
 }
+
+export class GetVirtualTxsRequest extends jspb.Message { 
+    clearTxidsList(): void;
+    getTxidsList(): Array<string>;
+    setTxidsList(value: Array<string>): GetVirtualTxsRequest;
+    addTxids(value: string, index?: number): string;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetVirtualTxsRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetVirtualTxsRequest): GetVirtualTxsRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetVirtualTxsRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetVirtualTxsRequest;
+    static deserializeBinaryFromReader(message: GetVirtualTxsRequest, reader: jspb.BinaryReader): GetVirtualTxsRequest;
+}
+
+export namespace GetVirtualTxsRequest {
+    export type AsObject = {
+        txidsList: Array<string>,
+    }
+}
+
+export class GetVirtualTxsResponse extends jspb.Message { 
+    clearTxsList(): void;
+    getTxsList(): Array<string>;
+    setTxsList(value: Array<string>): GetVirtualTxsResponse;
+    addTxs(value: string, index?: number): string;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetVirtualTxsResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetVirtualTxsResponse): GetVirtualTxsResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetVirtualTxsResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetVirtualTxsResponse;
+    static deserializeBinaryFromReader(message: GetVirtualTxsResponse, reader: jspb.BinaryReader): GetVirtualTxsResponse;
+}
+
+export namespace GetVirtualTxsResponse {
+    export type AsObject = {
+        txsList: Array<string>,
+    }
+}
